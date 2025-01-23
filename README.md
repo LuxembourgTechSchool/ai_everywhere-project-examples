@@ -11,10 +11,12 @@ Some examples for how to access the lts proxy as well as some project examples.
 4. Check streamlit is installed: `streamlit --version`
 5. Run a script. For example: `streamlit run example_get_speech.py`
 
-## Note 
-
+## Notes 
+### Spotify Example
 One data file is zipped to minimize its size. Unzip `spotify/universal_top_spotify_songs.zip` as such:
 ```
     cd spotify
     unzip universal_top_spotify_songs.zip
 ```
+### Postcard Example
+An example selfie image can be found in the `postcard` directory.
