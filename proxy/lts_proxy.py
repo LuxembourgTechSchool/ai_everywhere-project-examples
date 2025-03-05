@@ -11,6 +11,7 @@ class Proxy:
     CHAT_URL_SUFFIX = 'chat'
     IMAGE_URL_SUFFIX = 'image'
     SPEECH_URL_SUFFIX = 'speech'
+    VISION_URL_SUFFIX = 'vision'
 
     def __init__(self):
         self.lts_secret = st.secrets.lts_secret
@@ -123,3 +124,21 @@ class Proxy:
         except Exception as e:
             print(f"Error: {response.status_code} - {response.text} - For input: {input}")
             return None
+
+    def get_vision(self, image_path, system_message) -> str:
+            payload = {
+                'lts_secret': self.lts_secret,
+                'system_message': system_message
+            }
+
+            try:
+                with open(image_path, "rb") as image_file:
+                    files = {"image": image_file}
+                    response = requests.post(self.BASE_URL + self.VISION_URL_SUFFIX,
+                                            data=payload, files=files)
+                    response.raise_for_status()
+                    
+                    return response.json().get("response")
+            except Exception as e:
+                print(f"Error: {response.status_code} - {response.text} - For image: {image_path}")
+                return None

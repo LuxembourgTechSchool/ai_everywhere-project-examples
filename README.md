@@ -20,3 +20,10 @@ One data file is zipped to minimize its size. Unzip `spotify/universal_top_spoti
 ```
 ### Postcard Example
 An example selfie image can be found in the `postcard` directory.
+Example prompts:
+- "An image of the Niagara falls. No people or objects in the image at all. The image is taken from the distance."
+- "An image of a beach with the ocean in the background."
+
+### Other examples
+These examples show how to use the different OpenAI API points through the LTS proxy: 
+chat, image generation, text-to-speech, vision.
