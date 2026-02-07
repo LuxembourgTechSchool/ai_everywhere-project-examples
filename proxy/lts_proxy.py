@@ -16,6 +16,8 @@ class Proxy:
     def __init__(self):
         self.lts_secret = st.secrets.lts_secret
 
+    # Specific methods for the webapp crash course
+
     def __build_query1(self):
         self.query = f"""{self.question}\n'{self.user_data}\n Response 
         Specifications: 
@@ -90,7 +92,23 @@ class Proxy:
             return random.choice(list(file_json.keys())[1:])
         else:
             return random.choice(list(file_json.keys())[1:])
-        
+    
+    # Standard Methods
+
+    def get_chat(self, system_message, user_message, json_mode=False) -> str:
+        payload = {
+            'lts_secret': self.lts_secret,
+            'user_message': user_message,
+            'system_message': system_message,
+            'json_mode': json_mode
+        }
+        response = requests.post(self.BASE_URL+self.CHAT_URL_SUFFIX, data=payload)
+        try:
+            return response.json()["response"]
+        except Exception as e:
+            print(f"Error: {response.status_code} - {response.text} - For query: {self.query}")
+            return None
+
     def get_image(self, prompt) -> str:
         payload = {
             'lts_secret': self.lts_secret,
@@ -98,7 +116,7 @@ class Proxy:
         }
         headers = {
             'Content-Type': 'application/x-www-form-urlencoded'
-        }        
+        }
         try:
             response = requests.post(self.BASE_URL+self.IMAGE_URL_SUFFIX, 
                         headers=headers, 
@@ -125,19 +143,18 @@ class Proxy:
             print(f"Error: {response.status_code} - {response.text} - For input: {input}")
             return None
 
-    def get_vision(self, image_path, system_message) -> str:
+    def get_vision(self, image_path, system_message, prompt) -> str:
             payload = {
                 'lts_secret': self.lts_secret,
-                'system_message': system_message
+                'system_message': system_message,
+                'prompt': prompt,
             }
-
             try:
                 with open(image_path, "rb") as image_file:
                     files = {"image": image_file}
                     response = requests.post(self.BASE_URL + self.VISION_URL_SUFFIX,
                                             data=payload, files=files)
                     response.raise_for_status()
-                    
                     return response.json().get("response")
             except Exception as e:
                 print(f"Error: {response.status_code} - {response.text} - For image: {image_path}")

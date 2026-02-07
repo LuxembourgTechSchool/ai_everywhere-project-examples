@@ -1,10 +1,9 @@
 import base64
 import io
 from proxy import lts_proxy
-from PIL import Image
 import streamlit as st
 
-DATA_FORMAT = 'audio/mp3'
+DATA_FORMAT = 'audio/mpeg' # To play in the browser. Won't play mp3.
 
 input = st.chat_input("Enter your text to convert to speech")
 

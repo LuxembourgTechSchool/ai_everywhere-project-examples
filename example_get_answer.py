@@ -6,5 +6,5 @@ prompt = st.chat_input("Write your prompt for chat completion")
 if prompt:
     proxy = lts_proxy.Proxy()
     role = "You're an helpful assistant"
-    answer = proxy.get_answer(role, prompt)
+    answer = proxy.get_chat(role, prompt)
     st.write(answer)

@@ -6,8 +6,8 @@ proxy = lts_proxy.Proxy()
 
 st.title("OpenAI Vision API Example: Menu Extractor")
 
-system_message = st.text_area("Enter instructions for the vision model:", 
-                              "Extract all menu items and translate them into English.")
+system_message = st.text_area("Enter system message for the vision model:", 'Analyse this image.')
+prompt = st.text_area("Enter prompt for the vision model:", 'Extract all menu items and translate them into English.')
 
 # Example file: files/menu-hindi.jpg
 uploaded_file = st.file_uploader("Upload a menu image (PNG, JPG, JPEG)", type=["png", "jpg", "jpeg"])
@@ -19,7 +19,7 @@ if uploaded_file and system_message:
 
     try: 
         with st.spinner("Processing image..."):
-            response = proxy.get_vision(temp_image_path, system_message)
+            response = proxy.get_vision(temp_image_path, system_message, prompt)
 
         if response:
             st.subheader("Extracted Menu Items:")

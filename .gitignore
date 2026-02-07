@@ -3,6 +3,7 @@ __pycache__/
 
 # Venv
 .venv
+.venv3
 
 # Streamlit
 .streamlit/
@@ -14,3 +15,6 @@ streamlit-storage
 
 # Mac specific
 .DS_Store
+
+# Other
+universal_top_spotify_songs.csv
