@@ -109,7 +109,7 @@ class Proxy:
         try:
             return response.json()["response"]
         except Exception as e:
-            print(f"Error: {response.status_code} - {response.text} - For query: {self.query}")
+            print(f"Error: {response.status_code} - {response.text}")
             return None
 
     def get_image(self, prompt) -> str:
