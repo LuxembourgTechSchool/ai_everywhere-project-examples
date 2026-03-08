@@ -95,12 +95,15 @@ class Proxy:
     
     # Standard Methods
 
-    def get_chat(self, system_message, user_message, json_mode=False) -> str:
+    def get_chat(self, system_message, user_message, json_mode=False, model='default') -> str:
+        ''' Model can be latest (GPT-5) or fast (GPT-4). Default is latest.
+        '''
         payload = {
             'lts_secret': self.lts_secret,
             'user_message': user_message,
             'system_message': system_message,
-            'json_mode': json_mode
+            'model':model,
+            'json_mode': json_mode,
         }
         response = requests.post(self.BASE_URL+self.CHAT_URL_SUFFIX, data=payload)
         try:
